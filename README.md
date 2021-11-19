@@ -55,6 +55,7 @@ To inspire you, we have already created 2 endpoints:
 We expect you to write production code.
 By production code we mean that your code should be ready to be pushed into production.
 So write good code, test your code, and add documentation if needed.
+Also use a correct Git flow/branching.
 
 Good luck & Enjoy!
 

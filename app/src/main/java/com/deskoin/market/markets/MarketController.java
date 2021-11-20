@@ -1,8 +1,8 @@
 package com.deskoin.market.markets;
 
 import com.deskoin.market.markets.dto.MarketResponse;
-import com.deskoin.market.markets.mapper.MarketResponseMapper;
 import com.deskoin.market.markets.exception.MarketIllegalArgumentException;
+import com.deskoin.market.markets.mapper.MarketResponseMapper;
 import com.deskoin.market.markets.model.Market;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

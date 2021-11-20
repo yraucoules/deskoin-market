@@ -1,7 +1,6 @@
 package com.deskoin.market.markets;
 
 import com.deskoin.market.markets.exception.MarketIllegalArgumentException;
-import com.deskoin.market.markets.mapper.MarketResponseMapper;
 import com.deskoin.market.markets.model.Market;
 import com.deskoin.market.markets.model.MarketValue;
 import org.hamcrest.Matchers;

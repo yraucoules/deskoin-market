@@ -132,7 +132,7 @@ result=[
 
 ### Exercise 3
 
-Create an endpoint that returns the volume that can be obtained (BTC) for a given amount (EUR).
+Create an endpoint that returns the volume (BTC) that can be obtained for a given amount (EUR).
 
 _Tip: reuse the exercise 2_
 

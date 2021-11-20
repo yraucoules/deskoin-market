@@ -16,6 +16,11 @@
     <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
 
     <properties>
+        <skipTests>false</skipTests>
+        <skipIntegrationTests>false</skipIntegrationTests>
+        <skipUnitTests>${skipTests}</skipUnitTests>
+        <maven-surefire.version>2.22.2</maven-surefire.version>
+        <maven-failsafe.version>2.22.2</maven-failsafe.version>
         <java.version>1.11</java.version>
         <maven.compiler.release>11</maven.compiler.release>
         <maven.compiler.source>11</maven.compiler.source>
@@ -48,6 +53,31 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire.version}</version>
+                <configuration>
+                    <skipTests>${skipUnitTests}</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipITs>${skipIntegrationTests}</skipITs>
+                    <skipTests>${skipTests}</skipTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>

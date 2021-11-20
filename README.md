@@ -36,13 +36,13 @@ This application is running on http://localhost:9091
 
 ## Project description
 
-The project consists of the global BTC / EUR market (in this example composed of 2 Kraken and Binance exchanges).
+The project consists of the global BTC / EUR market (in this example composed of Kraken and Binance exchanges).
 
 Each market has a name and contains a list of values (price, volume).
 The price is expressed in EUR.
 Volume is the volume of BTC available for the given price.
 
-_Example: {10,1} means that there is 1 BTC available for the price of 10 EUR._
+_Example: {10,1} means that there is 1 BTC available for the price of 10 EUR/u._
 
 Market values are constantly changing (randomly in this project).
 
@@ -113,7 +113,7 @@ Binance=[
   {40,8},
   {100,10},
   {20,10},
-  {50,1}
+  {55,1}
 ]
 
 result=[
@@ -132,7 +132,7 @@ result=[
 
 ### Exercise 3
 
-Create an endpoint that returns the volume to buy for a given amount.
+Create an endpoint that returns the volume that can be obtained (BTC) for a given amount (EUR).
 
 _Tip: reuse the exercise 2_
 
@@ -151,19 +151,26 @@ Binance=[
   {40,8},
   {100,10},
   {20,10},
-  {50,1}
+  {55,1}
 ]
 
 input: amount=10 (EUR)
 output: result=1 (BTC)
+// 1 BTC for 10 EUR/u
 
 input: amount=30 (EUR)
 output: result=2 (BTC)
+// 1 BTC for 10 EUR/u
+// 1 BTC for 20 EUR/u
 
 input: amount=50 (EUR)
 output: result=3 (BTC)
+// 1 BTC for 10 EUR/u
+// 2 BTC for 20 EUR/u
 
 input: amount=60 (EUR)
 output: result=3.5 (BTC)
+// 1 BTC for 10 EUR/u
+// 2.5 BTC for 20 EUR/u
 
 ```

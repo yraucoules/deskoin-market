@@ -5,42 +5,51 @@ import com.deskoin.market.markets.model.MarketValue;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 @Repository
 public class MarketRepositoryImpl implements MarketRepository {
 
-    private static Map<String, Market> marketStore = initMarketStore();
+    private static final int MARKET_SIZE = 5;
+    private static final int MAX_BOUND = 10000;
+    private static final int SCALE = 2;
+    private static final String KRAKEN_EXCHANGE_NAME = "kraken";
+    private static final String BINANCE_EXCHANGE_NAME = "binance";
 
-    private static Map<String, Market> initMarketStore() {
-        List<MarketValue> krakenMarketValues = List.of(
-                new MarketValue(new BigDecimal("1000.0"), new BigDecimal("10.0")),
-                new MarketValue(new BigDecimal("845.0"), new BigDecimal("1.0")),
-                new MarketValue(new BigDecimal("951.0"), new BigDecimal("2.0")),
-                new MarketValue(new BigDecimal("504.0"), new BigDecimal("10.0")),
-                new MarketValue(new BigDecimal("673.0"), new BigDecimal("5.0"))
-        );
-        List<MarketValue> binanceMarketValues = List.of(
-                new MarketValue(new BigDecimal("435.0"), new BigDecimal("4.0")),
-                new MarketValue(new BigDecimal("749.0"), new BigDecimal("3.0")),
-                new MarketValue(new BigDecimal("195.0"), new BigDecimal("6.0")),
-                new MarketValue(new BigDecimal("693.0"), new BigDecimal("10.0")),
-                new MarketValue(new BigDecimal("835.0"), new BigDecimal("10.0"))
-        );
-        return Map.ofEntries(
-                new AbstractMap.SimpleEntry<>("kraken", new Market("kraken", krakenMarketValues)),
-                new AbstractMap.SimpleEntry<>("binance", new Market("binance", binanceMarketValues))
-        );
+    private final Random random;
+
+    public MarketRepositoryImpl(Random random) {
+        this.random = random;
     }
 
     @Override
     public Optional<Market> findByName(String marketName) {
-        return Optional.ofNullable(marketStore.get(marketName));
+        return Optional.ofNullable(getMarketStore().get(marketName));
     }
 
     @Override
     public List<Market> findAll() {
-        return new ArrayList<>(marketStore.values());
+        return new ArrayList<>(getMarketStore().values());
+    }
+
+    private Map<String, Market> getMarketStore() {
+        return Map.ofEntries(
+                new AbstractMap.SimpleEntry<>(KRAKEN_EXCHANGE_NAME, new Market(KRAKEN_EXCHANGE_NAME, generateValues())),
+                new AbstractMap.SimpleEntry<>(BINANCE_EXCHANGE_NAME, new Market(BINANCE_EXCHANGE_NAME, generateValues()))
+        );
+    }
+
+    private List<MarketValue> generateValues() {
+        ArrayList<MarketValue> marketValues = new ArrayList<>();
+        for (int i = 0; i < MARKET_SIZE; i++) {
+            marketValues.add(new MarketValue(generateValue(), generateValue()));
+        }
+        return marketValues;
+    }
+
+    private BigDecimal generateValue() {
+        return new BigDecimal(BigInteger.valueOf(random.nextInt(MAX_BOUND) + 1), SCALE);
     }
 
 }

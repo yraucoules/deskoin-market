@@ -1,5 +1,6 @@
-package com.deskoin.market.markets.dto;
+package com.deskoin.market.markets.mapper;
 
+import com.deskoin.market.markets.dto.MarketResponse;
 import com.deskoin.market.markets.model.Market;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class MarketResponseMapper {
         this.marketValueResponseMapper = marketValueResponseMapper;
     }
 
-    public List<MarketResponse> map(List<Market> markets) {
+    public List<MarketResponse> mapAll(List<Market> markets) {
         return markets == null ? null : markets.stream().map(this::map).collect(Collectors.toList());
     }
 
@@ -25,7 +26,7 @@ public class MarketResponseMapper {
         } else {
             var response = new MarketResponse();
             response.setName(market.getName());
-            response.setValues(marketValueResponseMapper.map(market.getValues()));
+            response.setValues(marketValueResponseMapper.mapAll(market.getValues()));
             return response;
         }
     }

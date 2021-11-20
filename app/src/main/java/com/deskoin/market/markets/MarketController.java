@@ -1,7 +1,7 @@
 package com.deskoin.market.markets;
 
 import com.deskoin.market.markets.dto.MarketResponse;
-import com.deskoin.market.markets.dto.MarketResponseMapper;
+import com.deskoin.market.markets.mapper.MarketResponseMapper;
 import com.deskoin.market.markets.exception.MarketIllegalArgumentException;
 import com.deskoin.market.markets.model.Market;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,7 +59,7 @@ public class MarketController {
     public List<MarketResponse> getMarkets() {
         LOGGER.debug("Retrieve markets");
         List<Market> markets = marketService.getMarkets();
-        return this.marketResponseMapper.map(markets);
+        return this.marketResponseMapper.mapAll(markets);
     }
 
 }

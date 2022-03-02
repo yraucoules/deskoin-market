@@ -66,6 +66,8 @@ You can use the following endpoints to view markets:
 1. GET /markets
 2. GET /markets/{name}
 
+Try to always return a JSON response body.
+
 ### Exercise 1
 
 Create an endpoint that returns the lowest price in the global market.
@@ -90,6 +92,13 @@ Binance=[
 ]
 
 result=10
+```
+
+Response body:
+```
+{
+  "price": 10.00
+}
 ```
 
 ### Exercise 2
@@ -127,6 +136,52 @@ result=[
   {90,1}
   {90,8},
   {100,10},
+]
+```
+
+Response body:
+```
+[
+  {
+    "price": 10.00,
+    "volume": 1.00
+  },
+  {
+    "price": 20.00,
+    "volume": 10.00
+  },
+  {
+    "price": 30.00,
+    "volume": 4.00
+  },
+  {
+    "price": 40.00,
+    "volume": 8.00
+  },
+  {
+    "price": 42.00,
+    "volume": 2.00
+  },
+  {
+    "price": 50.00,
+    "volume": 10.00
+  },
+  {
+    "price": 55.00,
+    "volume": 1.00
+  },
+  {
+    "price": 90.00,
+    "volume": 1.00
+  },
+  {
+    "price": 90.00,
+    "volume": 8.00
+  },
+  {
+    "price": 100.00,
+    "volume": 10.00
+  }
 ]
 ```
 
@@ -173,4 +228,12 @@ output: result=3.5 (BTC)
 // 1 BTC for 10 EUR/u
 // 2.5 BTC for 20 EUR/u
 
+```
+
+Response body:
+```
+{
+  "amount": 10.00,
+  "volume": 1.00
+}
 ```
